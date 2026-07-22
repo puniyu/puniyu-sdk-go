@@ -1,6 +1,4 @@
-package sender
-
-import "github.com/puniyu/puniyu-sdk-go/pkg/sex"
+package puniyu
 
 // Sender 消息发送者接口
 type Sender interface {
@@ -9,7 +7,7 @@ type Sender interface {
 	// Nick 获取发送者昵称
 	Nick() *string
 	// Sex 获取发送者性别
-	Sex() sex.Sex
+	Sex() Sex
 	// Age 获取发送者年龄
 	Age() *uint32
 }

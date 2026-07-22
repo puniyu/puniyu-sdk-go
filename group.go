@@ -1,27 +1,22 @@
-package sender
-
-import (
-	"github.com/puniyu/puniyu-sdk-go/pkg/role"
-	"github.com/puniyu/puniyu-sdk-go/pkg/sex"
-)
+package puniyu
 
 // GroupSender 群组消息发送者
 type GroupSender struct {
-	data groupSenderData
+	data GroupSenderData
 }
 
-// groupSenderData 群组消息发送者内部数据
-type groupSenderData struct {
+// GroupSenderData 群组消息发送者内部数据
+type GroupSenderData struct {
 	// UserID 发送者ID
 	UserID string `json:"user_id"`
 	// Nick 用户昵称
 	Nick *string `json:"nick,omitempty"`
 	// Sex 性别，默认 Unknown
-	Sex sex.Sex `json:"sex"`
+	Sex Sex `json:"sex"`
 	// Age 年龄
 	Age *uint32 `json:"age,omitempty"`
 	// Role 角色
-	Role role.Role `json:"role"`
+	Role Role `json:"role"`
 	// Card 名片
 	Card *string `json:"card,omitempty"`
 	// Level 等级
@@ -32,13 +27,13 @@ type groupSenderData struct {
 
 // GroupSenderBuilder 群组消息发送者构建器
 type GroupSenderBuilder struct {
-	data groupSenderData
+	data GroupSenderData
 }
 
 // NewGroupSenderBuilder 创建群组消息发送者构建器
 func NewGroupSenderBuilder() *GroupSenderBuilder {
 	return &GroupSenderBuilder{
-		data: groupSenderData{},
+		data: GroupSenderData{},
 	}
 }
 
@@ -55,7 +50,7 @@ func (b *GroupSenderBuilder) SetNick(nick string) *GroupSenderBuilder {
 }
 
 // SetSex 设置性别
-func (b *GroupSenderBuilder) SetSex(sex sex.Sex) *GroupSenderBuilder {
+func (b *GroupSenderBuilder) SetSex(sex Sex) *GroupSenderBuilder {
 	b.data.Sex = sex
 	return b
 }
@@ -67,7 +62,7 @@ func (b *GroupSenderBuilder) SetAge(age uint32) *GroupSenderBuilder {
 }
 
 // SetRole 设置角色
-func (b *GroupSenderBuilder) SetRole(role role.Role) *GroupSenderBuilder {
+func (b *GroupSenderBuilder) SetRole(role Role) *GroupSenderBuilder {
 	b.data.Role = role
 	return b
 }
@@ -99,7 +94,7 @@ func (b *GroupSenderBuilder) Build() *GroupSender {
 func (g *GroupSender) UserID() string { return g.data.UserID }
 
 // Sex 获取性别
-func (g *GroupSender) Sex() sex.Sex { return g.data.Sex }
+func (g *GroupSender) Sex() Sex { return g.data.Sex }
 
 // Nick 获取用户昵称
 func (g *GroupSender) Nick() *string { return g.data.Nick }
