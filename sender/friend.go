@@ -7,13 +7,13 @@ import (
 // FriendSender 好友消息发送者
 type FriendSender struct {
 	// ID 发送者ID
-	iUserID string
+	userID string
 	// Nick 用户昵称
-	iNick *string
+	nick *string
 	// Sex 性别，默认 Unknown
-	iSex sex.Sex
+	sex sex.Sex
 	// Age 年龄
-	iAge *uint32
+	age *uint32
 }
 
 type FriendSenderBuilder struct {
@@ -25,22 +25,22 @@ func NewFriendSenderBuilder() *FriendSenderBuilder {
 }
 
 func (fb *FriendSenderBuilder) WithUserID(userID string) *FriendSenderBuilder {
-	fb.friendSender.iUserID = userID
+	fb.friendSender.userID = userID
 	return fb
 }
 
 func (fb *FriendSenderBuilder) WithNick(nick string) *FriendSenderBuilder {
-	fb.friendSender.iNick = &nick
+	fb.friendSender.nick = &nick
 	return fb
 }
 
 func (fb *FriendSenderBuilder) WithSex(sex sex.Sex) *FriendSenderBuilder {
-	fb.friendSender.iSex = sex
+	fb.friendSender.sex = sex
 	return fb
 }
 
 func (fb *FriendSenderBuilder) WithAge(age uint32) *FriendSenderBuilder {
-	fb.friendSender.iAge = &age
+	fb.friendSender.age = &age
 	return fb
 }
 
@@ -49,17 +49,17 @@ func (fb *FriendSenderBuilder) Build() *FriendSender {
 }
 
 func (f *FriendSender) UserID() string {
-	return f.iUserID
+	return f.userID
 }
 
 func (f *FriendSender) Nick() *string {
-	return f.iNick
+	return f.nick
 }
 
 func (f *FriendSender) Sex() sex.Sex {
-	return f.iSex
+	return f.sex
 }
 
 func (f *FriendSender) Age() *uint32 {
-	return f.iAge
+	return f.age
 }
