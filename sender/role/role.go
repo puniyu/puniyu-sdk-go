@@ -1,30 +1,42 @@
 package role
 
-type Role string
+type Role struct {
+	value roleType
+}
+
+type roleType uint8
 
 const (
-	Owner   Role = "owner"
-	Admin   Role = "admin"
-	Member  Role = "member"
-	Unknown Role = "unknown"
+	owner roleType = iota
+	admin
+	member
+	unknown
 )
 
-func (r Role) String() string {
-	return string(r)
+func NewOwner() *Role {
+	return &Role{owner}
 }
 
-func (r Role) IsOwner() bool {
-	return r == Owner
+func NewAdmin() *Role {
+	return &Role{admin}
 }
 
-func (r Role) IsAdmin() bool {
-	return r == Admin
+func NewMember() *Role {
+	return &Role{member}
 }
 
-func (r Role) IsMember() bool {
-	return r == Member
+func (r *Role) IsOwner() bool {
+	return r.value == owner
 }
 
-func (r Role) IsUnknown() bool {
-	return r == Unknown
+func (r *Role) IsAdmin() bool {
+	return r.value == admin
+}
+
+func (r *Role) IsMember() bool {
+	return r.value == member
+}
+
+func (r *Role) IsUnknown() bool {
+	return r.value == unknown
 }

@@ -2,7 +2,6 @@ package sender
 
 import (
 	"github.com/puniyu/puniyu-sdk-go/sender/sex"
-	"github.com/vmihailenco/msgpack/v5"
 )
 
 // FriendSender 好友消息发送者
@@ -15,36 +14,6 @@ type FriendSender struct {
 	iSex sex.Sex
 	// Age 年龄
 	iAge *uint32
-}
-
-var _ msgpack.CustomEncoder = (*FriendSender)(nil)
-var _ msgpack.CustomDecoder = (*FriendSender)(nil)
-
-func (f *FriendSender) EncodeMsgpack(enc *msgpack.Encoder) error {
-	return enc.EncodeMulti(f.iUserID, f.iNick, f.iSex, f.iAge)
-}
-
-func (f *FriendSender) DecodeMsgpack(dec *msgpack.Decoder) error {
-	var sexValue int32
-	err := dec.DecodeMulti(&f.iUserID, &f.iNick, &sexValue, &f.iAge)
-	if err != nil {
-		return err
-	}
-	f.iSex = sex.Sex(sexValue)
-	return nil
-}
-
-func (f *FriendSender) Marshal() ([]byte, error) {
-	return msgpack.Marshal(f)
-}
-
-func UnmarshalFriendSender(data []byte) (*FriendSender, error) {
-	var fs FriendSender
-	err := msgpack.Unmarshal(data, &fs)
-	if err != nil {
-		return nil, err
-	}
-	return &fs, nil
 }
 
 type FriendSenderBuilder struct {

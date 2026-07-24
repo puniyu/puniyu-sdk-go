@@ -1,25 +1,37 @@
 package sex
 
-type Sex string
+type Sex struct {
+	value sexType
+}
+
+type sexType = uint8
 
 const (
-	Male    Sex = "male"
-	Female  Sex = "female"
-	Unknown Sex = "unknown"
+	male sexType = iota
+	female
+	unknown
 )
 
-func (s Sex) String() string {
-	return string(s)
+func NewMale() *Sex {
+	return &Sex{male}
 }
 
-func (s Sex) IsMale() bool {
-	return s == Male
+func NewFemale() *Sex {
+	return &Sex{female}
 }
 
-func (s Sex) IsFemale() bool {
-	return s == Female
+func NewUnknown() *Sex {
+	return &Sex{unknown}
 }
 
-func (s Sex) IsUnknown() bool {
-	return s == Unknown
+func (s *Sex) IsMale() bool {
+	return s.value == male
+}
+
+func (s *Sex) IsFemale() bool {
+	return s.value == female
+}
+
+func (s *Sex) IsUnknown() bool {
+	return s.value == unknown
 }
